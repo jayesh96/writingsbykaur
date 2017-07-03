@@ -76,12 +76,14 @@
 						</nav>
 						<nav class="main">
 							<ul>
+							<!--
 								<li class="search">
 									<a class="fa-search" href="#search">Search</a>
 									<form id="search" method="get" action="#">
 										<input type="text" name="query" placeholder="Search" />
 									</form>
 								</li>
+							-->	
 								<li class="menu">
 									<a class="fa-bars" href="#menu">Menu</a>
 								</li>
@@ -89,7 +91,6 @@
 						</nav>
 					</header>
 
-									<!-- Menu -->
 					<section id="menu">
 
 					{% if not request.user.is_authenticated %}
@@ -104,41 +105,41 @@
 							</section>
 
 						{% endif %}
+
+						{% if request.user.is_authenticated %}
+						<section>
+							
+						<ul class="actions vertical">
+									{% providers_media_js %}
+									<a href="{% url 'logout' %}" class="btn btn-block btn-social btn-facebook"><li class="button big fit" style="
+    background-color: #ff0000;">Logout</li>
+									</a>
+								</ul>
+
+					
+							</section>
+						{% endif %}
 						<!-- Search -->
+
+						<!--
 							<section>
 								<form class="search" method="get" action="#">
 									<input type="text" name="query" placeholder="Search" />
 								</form>
 							</section>
 
+-->
 						<!-- Links -->
 							<section>
-								<ul class="links">
-									<li>
-										<a href="#">
-											<h3>Lorem ipsum</h3>
-											<p>Feugiat tempus veroeros dolor</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>Dolor sit amet</h3>
-											<p>Sed vitae justo condimentum</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>Feugiat veroeros</h3>
-											<p>Phasellus sed ultricies mi congue</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>Etiam sed consequat</h3>
-											<p>Porta lectus amet ultricies</p>
-										</a>
-									</li>
+								<ul class="actions">
+								{% for i in genre %}
+										<li><a href="/genre/{{ i.title }}/" class="button fit">{{ i.title }}</a></li>
+								{% endfor %}
 								</ul>
+
+
+								
+
 							</section>
 
 						<!-- Actions -->
@@ -151,8 +152,12 @@
 
 						<!-- Post -->
 							<article class="post">
+							
+
 								<header>
 									<div class="title">
+									
+
 										<h2><a href="#">{{ title }}</a></h2>
 										<p>Read time: {% if instance.read_time <= 1 %} < 1 Minute {% else %}{{ instance.read_time }} minutes {% endif %}</p>
 									</div>
@@ -166,6 +171,10 @@
 								<span class="image featured imgres"><img src="{{ instance.image }}" alt="" /></span>
 								<p><div class="post-detail-item">{{ instance.get_markdown }}</div></p>
 								<footer>
+
+								
+
+
 								<!--
 									<ul class="stats">
 										<li><a href="#">{{ instance.genre.title }}</a></li>

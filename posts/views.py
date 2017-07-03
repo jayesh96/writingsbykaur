@@ -22,6 +22,7 @@ from comments.models import Comment
 from .forms import PostForm
 from .models import Post, Genre
 
+from django.contrib.auth.decorators import login_required
 
 import random
 
@@ -42,6 +43,8 @@ def post_create(request):
 	}
 	return render(request, "create.html", context)
 
+
+@login_required(login_url="/login/")
 def post_detail(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
 	
@@ -122,14 +125,21 @@ def post_list_genre(request, genre):
 	today = timezone.now().date()
 	genre = genre
 
-	print genre
-	genre_id = Genre.objects.filter(title=genre)[0].id
-	print genre_id
-	queryset_list = Post.objects.active().filter(genre=genre_id)
-	 #.order_by("-timestamp")
-	print(queryset_list)
-	genre  = Genre.objects.all()
-	print genre
+	try:
+		genre_id = Genre.objects.filter(title=genre)[0].id
+		queryset_list = Post.objects.active().filter(genre=genre_id)
+		genre  = Genre.objects.all()
+
+	except:
+		pass
+
+	queryset_list = Post.objects.active()
+
+	favourites_list = Post.objects.favourites()
+	if favourites_list.count()< 5:
+		 favourites_queryset_list = favourites_list
+	else:
+		favourites_queryset_list = random.sample(favourites_list,5)
 
 	if request.user.is_staff or request.user.is_superuser:
 		queryset_list = Post.objects.filter(genre=genre_id)
@@ -157,7 +167,8 @@ def post_list_genre(request, genre):
 
 	context = {
 		"genre":genre,
-		"object_list": queryset, 
+		"object_list": queryset,
+		"favourites" : favourites_queryset_list, 
 		"title": "List",
 		"page_request_var": page_request_var,
 		"today": today,

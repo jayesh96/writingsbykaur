@@ -20,15 +20,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from accounts.views import (login_view, register_view, logout_view)
+from django.views.generic import TemplateView
+
 
 urlpatterns = [
     
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')), 
     url(r'^comments/', include("comments.urls", namespace='comments')),
-    
-    url(r'^register/', register_view, name='register'),
-    url(r'^login/', login_view, name='login'),
+    url(r'^login/$', TemplateView.as_view(template_name="social_connect.html"), name='social-connect'),
     url(r'^logout/', logout_view, name='logout'),
     url(r'^', include("posts.urls", namespace='posts')),
     #url(r'^posts/$', "<appname>.views.<function_name>"),
