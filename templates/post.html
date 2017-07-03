@@ -1,0 +1,235 @@
+{% load staticfiles %}
+{% load socialaccount %}
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<marquee><title>Writings By Kaur|{{ instance.title }}</title></marquee>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	
+		<style type="text/css">
+			
+	.imgres{
+    width: 100%;
+    height: auto;
+}
+
+		</style>
+	</head>
+	<body class="single">
+
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '672411446300358',
+      xfbml      : true,
+      version    : 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="{% url 'posts:list' %}">Writings By Kaur</a></h1>
+						<nav class="links">
+							<ul>
+								{% if request.user.is_authenticated %}
+								<li>Welcome {{ request.user.first_name }} </li>
+							
+								{% else %}
+
+								<li>Welcome Guest</li>
+							{% endif %}
+								{% for i in genre %}
+								<li><a href="{% url 'posts:list-genre' i.title %}">{{ i }}</a></li>								
+								
+								{% endfor %}
+
+
+								{% if request.user.is_staff %}
+
+								<li><a href="{% url 'posts:create' %}">Create New Post</a></li>
+								{% endif %}
+
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+									<!-- Menu -->
+					<section id="menu">
+
+					{% if not request.user.is_authenticated %}
+						<section>
+								
+								<ul class="actions vertical">
+									{% providers_media_js %}
+									<a href="{% provider_login_url "facebook" method="js_sdk" %}" class="btn btn-block btn-social btn-facebook" style="background-color:#3b5998;text-align:center"><li class="button big fit" style="
+    background-color: #4c4cff;"><span>Login In With Facebook </span></li>
+									</a>
+								</ul>
+							</section>
+
+						{% endif %}
+						<!-- Search -->
+							<section>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="#">
+											<h3>Lorem ipsum</h3>
+											<p>Feugiat tempus veroeros dolor</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Dolor sit amet</h3>
+											<p>Sed vitae justo condimentum</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Feugiat veroeros</h3>
+											<p>Phasellus sed ultricies mi congue</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Etiam sed consequat</h3>
+											<p>Porta lectus amet ultricies</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">{{ title }}</a></h2>
+										<p>Read time: {% if instance.read_time <= 1 %} < 1 Minute {% else %}{{ instance.read_time }} minutes {% endif %}</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">{% if instance.draft == 'YES' %}<span style="background-color:#ff0000;"> Draft </span>{% endif %}{{ instance.publish }}</time>
+										<a href="" class="author"><span class="name">{% if instance.user.get_full_name %}{{ instance.user.get_full_name }}
+{% endif %}</span><img src="{{ instance.image }}" alt="" /></a><span><a href="#">{{ instance.genre.title|upper }}</a></span>
+									</div>
+								</header>
+
+								<span class="image featured imgres"><img src="{{ instance.image }}" alt="" /></span>
+								<p><div class="post-detail-item">{{ instance.get_markdown }}</div></p>
+								<footer>
+								<!--
+									<ul class="stats">
+										<li><a href="#">{{ instance.genre.title }}</a></li>
+										<li><a href="#" class="icon fa-heart">28</a></li>
+										<li><a href="#" class="icon fa-comment">128</a></li>
+									</ul>
+								-->
+								</footer>
+						
+								<div id="disqus_thread"></div>
+								<script>
+
+								/**
+								*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+								*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+								/*
+								var disqus_config = function () {
+								this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+								this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+								};
+								*/
+								(function() { // DON'T EDIT BELOW THIS LINE
+								var d = document, s = d.createElement('script');
+								s.src = 'https://writingsbykaur.disqus.com/embed.js';
+								s.setAttribute('data-timestamp', +new Date());
+								(d.head || d.body).appendChild(s);
+								})();
+								</script>
+								<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+															</article>
+
+
+								</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+							<li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/skel.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+
+<script id="dsq-count-scr" src="//writingsbykaur.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+	$(".post-detail-item img").each(function(){
+            $(this).addClass("imgres");
+    })
+</script>
+	</body>
+
+
+</html>
