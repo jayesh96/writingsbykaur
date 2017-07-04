@@ -2,8 +2,7 @@ from django import forms
 
 from pagedown.widgets import PagedownWidget
 
-from .models import Post
-
+from .models import Post,NewWriting
 
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=PagedownWidget(show_preview=True))
@@ -17,4 +16,15 @@ class PostForm(forms.ModelForm):
             "image",
             "draft",
             "publish",
+        ]
+
+class NewWritingForm(forms.ModelForm):
+    class Meta:
+        model = NewWriting
+        fields = [
+
+        'title',
+        'genre',
+        'content',
+        'join',
         ]

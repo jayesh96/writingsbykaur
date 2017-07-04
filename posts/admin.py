@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post,Genre
+from .models import Post,Genre,NewWriting
 
 class PostModelAdmin(admin.ModelAdmin):
 	list_display = ["title", "updated", "timestamp", "favs",'draft']
@@ -14,5 +14,6 @@ class PostModelAdmin(admin.ModelAdmin):
 		model = Post
 
 
+admin.site.register(NewWriting)
 admin.site.register(Genre)
 admin.site.register(Post, PostModelAdmin)

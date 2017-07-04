@@ -112,7 +112,6 @@
 						<section>
 							
 						<ul class="actions vertical">
-									{% providers_media_js %}
 									<a href="{% url 'logout' %}" class="btn btn-block btn-social btn-facebook"><li class="button big fit" style="
     background-color: #ff0000;">Logout</li>
 									</a>
@@ -148,6 +147,22 @@
 								
 
 							</section>
+
+													{% if request.user.is_staff or request.user.is_superuser %}
+													<section>
+							
+
+						<ul class="actions vertical">
+						<p><h3>Create A New Post Here</h3></p>
+									<a href="{% url 'posts:create' %}" class="btn btn-block btn-social btn-facebook"><li class="button big fit" >Click Here</li>
+									</a>
+								</ul>
+
+					
+							</section>
+
+						{% endif %}
+
 
 						<!-- Actions -->
 							
@@ -602,6 +617,21 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 									
 								</ul>
 							</section>
+
+						{% if not request.user.is_staff or not request.user.is_superuser %}
+													<section>
+							
+
+						<ul class="actions vertical">
+						<p><h3>Want To Get Your Writing Published?</h3></p>
+									<a href="{% url 'posts:create' %}" class="btn btn-block btn-social btn-facebook"><li class="button big fit" >Click Here</li>
+									</a>
+								</ul>
+
+					
+							</section>
+
+						{% endif %}
 
 						<!-- About -->
 							<section class="blurb">

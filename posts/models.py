@@ -129,3 +129,20 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
+
+
+class NewWriting(models.Model):
+    title = models.CharField(max_length=120, null=False, blank=False)
+    genre = models.ForeignKey(Genre, null=False, blank=False)
+    name = models.CharField(max_length=1000, null=False, blank=False)
+    email = models.EmailField(null=False, blank=False)
+    content = models.TextField(null=False, blank=False)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    join = models.CharField( max_length=5,choices=draft_choice,default='NO',verbose_name='Want to Join the team?')
+
+
+    def __unicode__(self):
+        return self.title
+
+    def __str__(self):
+        return self.title

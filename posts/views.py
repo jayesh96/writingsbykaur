@@ -19,29 +19,13 @@ from django.utils import timezone
 
 from comments.forms import CommentForm
 from comments.models import Comment
-from .forms import PostForm
+from .forms import PostForm,NewWritingForm
 from .models import Post, Genre
 
 from django.contrib.auth.decorators import login_required
 
 import random
 
-def post_create(request):
-	if not request.user.is_staff or not request.user.is_superuser:
-		raise Http404
-		
-	form = PostForm(request.POST or None, request.FILES or None)
-	if form.is_valid():
-		instance = form.save(commit=False)
-		instance.user = request.user
-		instance.save()
-		# message success
-		messages.success(request, "Successfully Created")
-		return HttpResponseRedirect(instance.get_absolute_url())
-	context = {
-		"form": form,
-	}
-	return render(request, "create.html", context)
 
 
 @login_required(login_url="/login/")
@@ -74,15 +58,10 @@ def post_list(request):
 	queryset_list = Post.objects.active() #.order_by("-timestamp")
 	
 	favourites_list = Post.objects.favourites()
-
-	print (favourites_list)
-
 	if favourites_list.count()< 5:
 		 favourites_queryset_list = favourites_list
 	else:
 		favourites_queryset_list = random.sample(favourites_list,5)
-
-	print favourites_queryset_list
 
 	genre  = Genre.objects.all()
 	if request.user.is_staff or request.user.is_superuser:
@@ -125,15 +104,18 @@ def post_list_genre(request, genre):
 	today = timezone.now().date()
 	genre = genre
 
+	print(genre)
+
 	try:
 		genre_id = Genre.objects.filter(title=genre)[0].id
 		queryset_list = Post.objects.active().filter(genre=genre_id)
+		print queryset_list
 		genre  = Genre.objects.all()
 
 	except:
 		pass
 
-	queryset_list = Post.objects.active()
+	# queryset_list = Post.objects.active()
 
 	favourites_list = Post.objects.favourites()
 	if favourites_list.count()< 5:
@@ -195,7 +177,52 @@ def post_update(request, slug=None):
 	}
 	return render(request, "create.html", context)
 
+@login_required(login_url="/login/")
+def post_create(request):
+	if not request.user.is_staff or not request.user.is_superuser:
+		form = NewWritingForm(request.POST or None, request.FILES or None)
+		if form.is_valid():
+			instance = form.save(commit=False)
+			
+			instance.name = request.user.first_name
+			instance.email = request.user.email
+			instance.save()
+			return HttpResponseRedirect('/')
+		context = {
+		"form": form,
+		}
+		return render(request, "create.html", context)
 
+	form = PostForm(request.POST or None, request.FILES or None)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.user = request.user
+		instance.save()
+		# message success
+		messages.success(request, "Successfully Created")
+		return HttpResponseRedirect(instance.get_absolute_url())
+	context = {
+		"form": form,
+	}
+	return render(request, "create.html", context)
+
+# def newwritingform(request):
+# 	form = NewWritingForm(request.POST or None, request.FILES or None)
+# 	if request.user.is_staff or request.user.is_superuser:
+
+# 	else:
+# 		if form.is_valid():
+# 		instance = form.save(commit=False)
+		
+# 		instance.name = request.user.first_name
+# 		instance.email = request.user.email
+# 		instance.save()
+# 		return HttpResponseRedirect('/')
+
+# 	context = {
+# 		"form": form,
+# 	}
+# 	return render(request, "create.html", context)
 
 def post_delete(request, slug=None):
 	if not request.user.is_staff or not request.user.is_superuser:
