@@ -75,7 +75,7 @@ def post_list(request):
 				Q(user__first_name__icontains=query) |
 				Q(user__last_name__icontains=query)
 				).distinct()
-	paginator = Paginator(queryset_list, 4) # Show 25 contacts per page
+	paginator = Paginator(queryset_list, 3) # Show 25 contacts per page
 	page_request_var = "page"
 	page = request.GET.get(page_request_var)
 	try:
@@ -179,7 +179,21 @@ def post_update(request, slug=None):
 
 @login_required(login_url="/login/")
 def post_create(request):
-	if not request.user.is_staff or not request.user.is_superuser:
+	if request.user.is_staff or request.user.is_superuser:
+		form = PostForm(request.POST or None, request.FILES or None)
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.user = request.user
+			instance.save()
+			# message success
+			messages.success(request, "Successfully Created")
+			return HttpResponseRedirect(instance.get_absolute_url())
+		context = {
+			"form": form,
+		}
+		return render(request, "create.html", context)
+
+	else:
 		form = NewWritingForm(request.POST or None, request.FILES or None)
 		if form.is_valid():
 			instance = form.save(commit=False)
@@ -188,41 +202,11 @@ def post_create(request):
 			instance.email = request.user.email
 			instance.save()
 			return HttpResponseRedirect('/')
+
 		context = {
-		"form": form,
+			"form": form,
 		}
 		return render(request, "create.html", context)
-
-	form = PostForm(request.POST or None, request.FILES or None)
-	if form.is_valid():
-		instance = form.save(commit=False)
-		instance.user = request.user
-		instance.save()
-		# message success
-		messages.success(request, "Successfully Created")
-		return HttpResponseRedirect(instance.get_absolute_url())
-	context = {
-		"form": form,
-	}
-	return render(request, "create.html", context)
-
-# def newwritingform(request):
-# 	form = NewWritingForm(request.POST or None, request.FILES or None)
-# 	if request.user.is_staff or request.user.is_superuser:
-
-# 	else:
-# 		if form.is_valid():
-# 		instance = form.save(commit=False)
-		
-# 		instance.name = request.user.first_name
-# 		instance.email = request.user.email
-# 		instance.save()
-# 		return HttpResponseRedirect('/')
-
-# 	context = {
-# 		"form": form,
-# 	}
-# 	return render(request, "create.html", context)
 
 def post_delete(request, slug=None):
 	if not request.user.is_staff or not request.user.is_superuser:

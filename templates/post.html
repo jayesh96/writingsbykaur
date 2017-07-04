@@ -160,11 +160,12 @@
 
 										<h2><a href="#">{{ title }}</a></h2>
 										<p>Read time: {% if instance.read_time <= 1 %} < 1 Minute {% else %}{{ instance.read_time }} minutes {% endif %}</p>
+										<p>{% if instance.user.get_full_name %}<b>By:{{ instance.user.get_full_name }}</b>
+{% endif %}</p>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2015-11-01">{% if instance.draft == 'YES' %}<span style="background-color:#ff0000;"> Draft </span>{% endif %}{{ instance.publish }}</time>
-										<a href="" class="author"><span class="name">{% if instance.user.get_full_name %}{{ instance.user.get_full_name }}
-{% endif %}</span><img src="{{ instance.image }}" alt="" /></a><span><a href="#">{{ instance.genre.title|upper }}</a></span>
+										<span class="name">{% if instance.draft == 'YES' %}<span style="background-color:#ff0000;"> Draft </span>{% endif %}{{ instance.publish }}</span>
+										<a href="" class="author"></a><span><a href="#"><b>{{ instance.genre.title|upper }}</b></a></span>
 									</div>
 								</header>
 
