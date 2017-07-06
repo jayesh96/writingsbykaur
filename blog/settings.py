@@ -129,7 +129,7 @@ DATABASES['default'].update(db_from_env)
 
 
 ######change site id=8 for local use ########
-SITE_ID = 8
+SITE_ID = 1
 
 
 # Password validation
