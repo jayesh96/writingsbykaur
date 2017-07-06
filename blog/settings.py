@@ -30,7 +30,7 @@ SECRET_KEY = 'sm@g)(fbwdh5wc*xe@j++m9rh^uza5se9a57c5ptwkg*b@ki0x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['writingsbykaur.herokuapp.com']
+ALLOWED_HOSTS = ['*','writingsbykaur.herokuapp.com']
 
 
 # Application definition
@@ -129,7 +129,7 @@ DATABASES['default'].update(db_from_env)
 
 
 ######change site id=8 for local use ########
-SITE_ID = 1
+SITE_ID = 8
 
 
 # Password validation
