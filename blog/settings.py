@@ -30,7 +30,7 @@ SECRET_KEY = 'sm@g)(fbwdh5wc*xe@j++m9rh^uza5se9a57c5ptwkg*b@ki0x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','writingsbykaur.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -212,12 +212,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERSION': 'v2.4',
     }
 }
-
-
-
-
-
-
 
 
 
