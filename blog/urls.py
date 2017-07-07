@@ -29,7 +29,6 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')), 
     url(r'^comments/', include("comments.urls", namespace='comments')),
     url(r'^login/$', TemplateView.as_view(template_name="social_connect.html"), name='social-connect'),
-    url(r'^contact/$', TemplateView.as_view(template_name="contact.html"), name='contact'),
     url(r'^logout/', logout_view, name='logout'),
     url(r'^', include("posts.urls", namespace='posts')),
     #url(r'^posts/$', "<appname>.views.<function_name>"),
