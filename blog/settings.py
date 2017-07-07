@@ -32,6 +32,10 @@ SECRET_KEY = 'sm@g)(fbwdh5wc*xe@j++m9rh^uza5se9a57c5ptwkg*b@ki0x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+if DEBUG == True:
+    site_id = 1
+else:
+    site_id = 8
 
 ALLOWED_HOSTS = ['writingsbykaur.herokuapp.com']
 
@@ -149,7 +153,7 @@ MANAGERS = ADMINS
 
 
 ######change site id=8 for local use ########
-SITE_ID = 1
+SITE_ID = site_id
 
 
 # Password validation
