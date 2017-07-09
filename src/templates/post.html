@@ -144,6 +144,22 @@
 
 							</section>
 
+							{% if request.user.is_staff %}
+
+							<section>
+								<ul class="actions">
+								{% for i in genre %}
+										<li><a href=" {% url 'posts:update' instance.slug %} " class="button fit">{{ i.title }}</a></li>
+								{% endfor %}
+								</ul>
+
+
+								
+
+							</section>
+
+
+							{% endif %}
 						<!-- Actions -->
 							
 
