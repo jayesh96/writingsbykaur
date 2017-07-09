@@ -36,7 +36,7 @@ def post_detail(request, slug=None):
 	if instance.publish > timezone.now().date() or instance.draft == 'YES':
 		if not request.user.is_staff or not request.user.is_superuser:
 			raise Http404
-	share_string = quote_plus(instance.content)
+
 
 	genre  = Genre.objects.all()
 
@@ -49,7 +49,6 @@ def post_detail(request, slug=None):
 		"genre":genre,
 		"title": instance.title,
 		"instance": instance,
-		"share_string": share_string,
 	}
 	return render(request, "post.html", context)
 
