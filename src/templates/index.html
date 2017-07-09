@@ -73,6 +73,17 @@
 
 								<li><a href="{% url 'posts:create' %}">Create New Post</a></li>
 								{% endif %}
+
+
+						{% if not request.user.is_staff %}
+
+										<li><a href="{% url 'posts:create' %}">{{ request.user.is_superuser }}</a></li>
+
+
+						{% endif %}
+
+
+
 																
 							</ul>
 						</nav>
@@ -167,6 +178,26 @@
 						{% endif %}
 
 
+						{% if not request.user.is_staff or not request.user.is_superuser %}
+
+
+
+
+						<ul class="actions vertical">
+						<p><h3>Create A New Post Here</h3></p>
+									<a href="{% url 'posts:create' %}" class="btn btn-block btn-social btn-facebook"><li class="button big fit" >Click Here</li>
+									</a>
+								</ul>
+
+					
+							</section>
+
+
+						{% endif %}
+
+
+
+
 						<!-- Actions -->
 							
 
@@ -192,9 +223,7 @@
 										{% if obj.user.get_full_name %}
 										<a href="#" class="author"><span class="name">{{ obj.user.get_full_name }}</span>
 										{% endif %}
-										{% if obj.image %}
-										<img src="{{ obj.image }}" alt="" />
-										{% endif %}
+										
 										</a>
 									</div>
 								</header>

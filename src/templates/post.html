@@ -70,6 +70,8 @@
 								{% if request.user.is_staff %}
 
 								<li><a href="{% url 'posts:create' %}">Create New Post</a></li>
+								<li><a href="{% url 'posts:update' instance.slug %}">Edit</a></li>
+
 								{% endif %}
 
 							</ul>
