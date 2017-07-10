@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.db.models.signals import post_save
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 # Create your models here.
 
@@ -28,11 +28,13 @@ def contact_post_saved_receiver(sender, instance, created, *args, **kwargs):
     try:
     	email = 'jayesh.bidani@gmail.com'
     	subject = obj.subject
+    	print subject
     	message = obj.message +'. This mail is sent by ' + obj.name + " " + obj.email
-    	send_mail(subject, message, email, email)
-    	print(subject, message)
+    	message=EmailMessage(subject=obj.subject,body=message,to=['jayesh.bidani@gmail.com'])
+     	message.content_subtype='html'
+      	message.send()
 
     except:
-    	pass
+    	print "Failed"
 
 post_save.connect(contact_post_saved_receiver, sender=Contact)

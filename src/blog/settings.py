@@ -37,7 +37,7 @@ if DEBUG == False:
 else:
     site_id = 8
 
-ALLOWED_HOSTS = ['writingsbykaur.herokuapp.com','writingsbykaur1.herokuapp.com']
+ALLOWED_HOSTS = ['192.168.0.12','writingsbykaur.herokuapp.com','writingsbykaur1.herokuapp.com']
 
 
 
@@ -116,6 +116,8 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 
 )
+
+
 
 
 WSGI_APPLICATION = 'blog.wsgi.application'
