@@ -29,8 +29,11 @@ def contact_post_saved_receiver(sender, instance, created, *args, **kwargs):
     	email = 'jayesh.bidani@gmail.com'
     	subject = obj.subject
     	print subject
-    	message = obj.message +'. This mail is sent by ' + obj.name + " " + obj.email
-    	message=EmailMessage(subject=obj.subject,body=message,to=['jayesh.bidani@gmail.com'])
+    	message = "Message:" + obj.message +' <br> .This mail is sent by ' + obj.name + "<br> " + obj.email
+    	message=EmailMessage(subject=obj.subject,body=message,to=['simrankr012@gmail.com','jayesh.bidani@gmail.com'])
+     	message.content_subtype='html'
+      	message.send()
+      	message=EmailMessage(subject="Thanks",body="Thanks for your concern, we will revert back shortly",to=['simrankr012@gmail.com','jayesh.bidani@gmail.com'])
      	message.content_subtype='html'
       	message.send()
 
