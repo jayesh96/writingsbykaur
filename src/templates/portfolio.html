@@ -54,6 +54,16 @@
 
 	</head>
 	<body>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9&appId=1674588392844900";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
 
 	<div id="fh5co-container">
 		<div id="fh5co-home" class="js-fullheight" data-section="home">
@@ -87,11 +97,11 @@
 						<a href="#" data-nav-section="about">About</a>
 					</div>
 					<div class="fh5co-logo">
-						<a href="#" data-nav-section="menu">Blog</a>
+						<a href="/" data-nav-section="menu">Blog</a>
 						
 					</div>
 					<div class="fh5co-menu-2">
-						<a href="#" data-nav-section="events">Team</a>
+						<a href="#" data-nav-section="team">Team</a>
 						<a href="#" data-nav-section="reservation">Contact Us</a>
 					</div>
 				</div>
@@ -208,7 +218,7 @@ Let's work together and remind people about self love and motivation that is bur
 }
 
 </style>
-		<div id="fh5co-menus">
+		<div id="fh5co-menus" data-section="team">
 
 			<section id="team">
 			 <div class="container">
@@ -223,13 +233,12 @@ Let's work together and remind people about self love and motivation that is bur
                     <div class="team-member">
                         <img src="{% static 'images/3.png' %}" class="img-responsive img-circle" alt="">
                         <h4>Simran Kaur </h4>
-                        <p class="text-muted">Lead Designer</p>
+                        <p class="text-muted">Creative Director</p>
                         <div class="row">
 				<div class="col-md-12 text-center">
 					<ul class="fh5co-social">
-						<li class="to-animate-2"><a href=""><i class="icon-facebook"></i></a></li>
-						<li class="to-animate-2"><a href=""><i class="icon-twitter"></i></a></li>
-						<li class="to-animate-2"><a href=""><i class="icon-instagram"></i></a></li>
+						<li class="to-animate-2"><a href="https://www.facebook.com/simrankr012"><i class="icon-facebook"></i></a></li>
+						<li class="to-animate-2"><a href="https://www.instagram.com/simrankr012/?hl=en"><i class="icon-instagram"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -244,7 +253,6 @@ Let's work together and remind people about self love and motivation that is bur
 				<div class="col-md-12 text-center">
 					<ul class="fh5co-social">
 						<li class="to-animate-2"><a href=""><i class="icon-facebook"></i></a></li>
-						<li class="to-animate-2"><a href=""><i class="icon-twitter"></i></a></li>
 						<li class="to-animate-2"><a href=""><i class="icon-instagram"></i></a></li>
 					</ul>
 				</div>
@@ -260,7 +268,6 @@ Let's work together and remind people about self love and motivation that is bur
 				<div class="col-md-12 text-center">
 					<ul class="fh5co-social">
 						<li class="to-animate-2"><a href=""><i class="icon-facebook"></i></a></li>
-						<li class="to-animate-2"><a href=""><i class="icon-twitter"></i></a></li>
 						<li class="to-animate-2"><a href=""><i class="icon-instagram"></i></a></li>
 					</ul>
 				</div>
@@ -369,18 +376,20 @@ Let's work together and remind people about self love and motivation that is bur
 
 	<div id="fh5co-footer">
 		<div class="container">
-			<div class="row row-padded">
-				<div class="col-md-12 text-center">
+
 					<p class="to-animate" style="color:rgba(0, 0, 0, 0.0)">&copy; 2016 Foodee Free HTML5 Template. <br> Designed by FREEHTML5.com <br/> 
 					</p>
-				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-center">
+					<ul>
+
+						<div class="fb-follow" data-href="https://www.facebook.com/writingsbykaur/" data-width="200" data-layout="standard" data-size="large" data-show-faces="true"></div>
+
+					</ul>
 					<ul class="fh5co-social">
-						<li class="to-animate-2"><a href="www.facebook.com/writingsbykaur"><i class="icon-facebook"></i></a></li>
-						<li class="to-animate-2"><a href="www.twitter.com/writingsbykaur"><i class="icon-twitter"></i></a></li>
-						<li class="to-animate-2"><a href="www.instagram.com/writingsbykaur"><i class="icon-instagram"></i></a></li>
+						<li class="to-animate-2"><a href="https://www.facebook.com/writingsbykaur"><i class="icon-facebook"></i></a></li>
+						<li class="to-animate-2"><a href="https://www.instagram.com/writingsbykaur"><i class="icon-instagram"></i></a></li>
 					</ul>
 				</div>
 			</div>
