@@ -21,6 +21,7 @@ from django.contrib import admin
 
 from accounts.views import (login_view, register_view, logout_view)
 from django.views.generic import TemplateView
+from Portfolio.views import portfolio
 
 
 urlpatterns = [
@@ -29,7 +30,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')), 
     url(r'^comments/', include("comments.urls", namespace='comments')),
     url(r'^login/$', TemplateView.as_view(template_name="social_connect.html"), name='social-connect'),
-    url(r'^about/$', TemplateView.as_view(template_name="portfolio.html"), name='portfolio'),
+    url(r'^about/$', portfolio , name='portfolio'),
     url(r'^logout/', logout_view, name='logout'),
     url(r'^', include("posts.urls", namespace='posts')),
     #url(r'^posts/$', "<appname>.views.<function_name>"),
