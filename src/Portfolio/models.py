@@ -33,7 +33,7 @@ def contact_post_saved_receiver(sender, instance, created, *args, **kwargs):
     	message=EmailMessage(subject=obj.subject,body=message,to=['simrankr012@gmail.com','jayesh.bidani@gmail.com'])
      	message.content_subtype='html'
       	message.send()
-      	message=EmailMessage(subject="Thanks",body="Thanks for your concern, we will revert back shortly",to=['simrankr012@gmail.com','jayesh.bidani@gmail.com'])
+      	message=EmailMessage(subject="Thanks",body="Thanks for your concern, we will revert back shortly",to=['simrankr012@gmail.com',obj.email])
      	message.content_subtype='html'
       	message.send()
 
