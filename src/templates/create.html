@@ -107,6 +107,19 @@
                             </section>
                         {% endif %}
 
+                        {% if request.user.is_authenticated %}
+                        <section>
+                            
+                        <ul class="actions vertical">
+                                    <a href="{% url 'logout' %}" class="btn btn-block btn-social btn-facebook"><li class="button big fit" style="
+    background-color: #ff0000;">Logout</li>
+                                    </a>
+                                </ul>
+
+                    
+                            </section>
+                        {% endif %}
+
                         <!-- Search -->
                             <section>
                                 <form class="search" method="get" action="#">
@@ -117,32 +130,15 @@
                         <!-- Links -->
                             
                             <section>
-                                <ul class="links">
-                                    <li>
-                                        <a href="#">
-                                            <h3>{{ request.user.first_name }}{{ request.user.last_name }}</h3>
-                                            <p>Feugiat tempus veroeros dolor</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <h3>Dolor sit amet</h3>
-                                            <p>Sed vitae justo condimentum</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <h3>Feugiat veroeros</h3>
-                                            <p>Phasellus sed ultricies mi congue</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <h3>Etiam sed consequat</h3>
-                                            <p>Porta lectus amet ultricies</p>
-                                        </a>
-                                    </li>
+                                <ul class="actions">
+                                {% for i in genre %}
+                                        <li><a href="/genre/{{ i.title }}/" class="button fit">{{ i.title }}</a></li>
+                                {% endfor %}
                                 </ul>
+
+
+                                
+
                             </section>
 
                         <!-- Actions -->

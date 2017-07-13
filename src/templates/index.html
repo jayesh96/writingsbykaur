@@ -77,7 +77,7 @@
 
 						{% if not request.user.is_staff %}
 
-										<li><a href="{% url 'posts:create' %}">{{ request.user.is_superuser }}</a></li>
+										<li><a href="{% url 'posts:create' %}">Create a new post</a></li>
 
 
 						{% endif %}
@@ -132,7 +132,7 @@
 							</section>
 						{% endif %}
 
-						<!-- Search -->
+						<!-- Search
 
 							<section>
 								<form class="search" method="get" action="#">
@@ -140,7 +140,7 @@
 								</form>
 							</section>
 
-						<!-- Links -->
+						 Links -->
 							
 							
 								
@@ -235,7 +235,12 @@
 								
 									<ul class="actions">
 										<li><a href='{{ obj.get_absolute_url }}' class="button big">Continue Reading</a></li>
+										<li><a href="{% url 'posts:update' obj.slug %}" class="button big">Edit </a></li>
 									</ul>
+									{% if request.user.is_staff %}
+								
+									{% endif %}
+
 									<!--
 									<ul class="stats">
 										<li><a href="/genre/{{ obj.genre.title }}/">{{ obj.genre.title }}</a></li>
@@ -638,9 +643,10 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 										<article>
 											<header>
 												<h3><a href="#">{{ instance.title }}</a></h3>
+												<p>By: {{ instance.user.get_full_name }}</p>
 												<time class="published" datetime="2015-10-20">{{ instance.publish }}</time>
 											</header>
-											<a href="#" class="image"><img src="{% static 'images/pic08.jpg' %}" alt="" /></a>
+											<a href="#" class="image"><img src="{{ instance.image }}" alt="" /></a>
 										</article>
 									</li>
 
@@ -680,12 +686,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 						<!-- Footer -->
 							<section id="footer">
 								<ul class="icons">
-									<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
-									<li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
+									<li><a href="http://www.facebook.com/writingsbykaur" class="fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="www.instagram.com/writingsbykaur" class="fa-instagram"><span class="label">Instagram</span></a></li>								</ul>
 								<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
 							</section>
 
