@@ -26,16 +26,18 @@ class Contact(models.Model):
 def contact_post_saved_receiver(sender, instance, created, *args, **kwargs):
     obj = instance
     try:
-    	email = 'jayesh.bidani@gmail.com'
-    	subject = obj.subject
-    	print subject
-    	message = "Message:" + obj.message +' <br> .This mail is sent by ' + obj.name + "<br> " + obj.email
-    	message=EmailMessage(subject=obj.subject,body=message,to=['simrankr012@gmail.com','jayesh.bidani@gmail.com'])
-     	message.content_subtype='html'
-      	message.send()
-      	message=EmailMessage(subject="Thanks",body="Thanks for your concern, we will revert back shortly",to=['simrankr012@gmail.com',obj.email])
-     	message.content_subtype='html'
-      	message.send()
+      email = 'simrankr012@gmail.com'
+      subject = obj.subject
+      print subject
+
+      message = "Message:" + obj.message +' <br> .This mail is sent by ' + obj.name + "<br> " + obj.email
+      message=EmailMessage(subject=obj.subject,body=message,to=['simrankr012@gmail.com','jayesh.bidani@gmail.com'])
+      message.content_subtype='html'
+      message.send()
+
+      message=EmailMessage(subject="Greetings from Writingbykaur",body="Hello" + obj.name + "Thanks for reaching out to us. We will revert shortly.<br/> Have a nice day! </br> Regards </br> Writingsbykaur" ,to=[obj.email])
+      message.content_subtype='html'
+      message.send()
 
     except:
     	print "Failed"
