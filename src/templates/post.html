@@ -65,8 +65,18 @@
 							{% endif %}
 								{% for i in genre %}
 								<li><a href="{% url 'posts:list-genre' i.title %}">{{ i }}</a></li>								
-								
 								{% endfor %}
+
+
+
+
+								{% if not request.user.is_staff %}
+
+								<li><a href="{% url 'posts:create' %}">Create New Post</a></li>
+
+								{% endif %}
+
+
 
 
 								{% if request.user.is_staff %}
@@ -150,9 +160,9 @@
 
 							<section>
 								<ul class="actions">
-								{% for i in genre %}
 										<li><a href=" {% url 'posts:update' instance.slug %} " class="button fit">Edit</a></li>
-								{% endfor %}
+																				<li><a href=" {% url 'posts:create'  %} " class="button fit">Submit New Post</a></li>
+
 								</ul>
 
 
@@ -162,8 +172,25 @@
 
 
 							{% endif %}
+
+							
 						<!-- Actions -->
 							
+							{% if not request.user.is_staff %}
+
+							<section>
+								<ul class="actions">
+										<li><a href=" {% url 'posts:create'  %} " class="button fit">Submit New Post</a></li>
+								</ul>
+
+
+								
+
+							</section>
+
+
+							{% endif %}
+
 
 					</section>
 
