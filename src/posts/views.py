@@ -56,7 +56,7 @@ def post_list(request):
 	today = timezone.now().date()
 	queryset_list = Post.objects.active() #.order_by("-timestamp")
 	
-	favourites_list = Post.objects.filter(favs=True, draft=False)
+	favourites_list = Post.objects.filter(favs=True).filter(draft="NO")
 	print favourites_list
 	if favourites_list.count()< 5:
 		 favourites_queryset_list = favourites_list
@@ -119,7 +119,8 @@ def post_list_genre(request, genre):
 
 	# queryset_list = Post.objects.active()
 
-	favourites_list = Post.objects.filter(favs=True, draft=False)
+	favourites_list = Post.objects.filter(favs=True).filter(draft="NO")
+	print favourites_list
 	if favourites_list.count()< 5:
 		 favourites_queryset_list = favourites_list
 	else:
