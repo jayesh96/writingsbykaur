@@ -236,7 +236,11 @@
 								
 									<ul class="actions">
 										<li><a href='{{ obj.get_absolute_url }}' class="button big">Continue Reading</a></li>
+										{% if request.user.is_staff or request.user.is_superuser %}
+												
 										<li><a href="{% url 'posts:update' obj.slug %}" class="button big">Edit </a></li>
+
+										{% endif %}
 									</ul>
 									{% if request.user.is_staff %}
 								
@@ -643,11 +647,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 									<li>
 										<article>
 											<header>
-												<h3><a href="#">{{ instance.title }}</a></h3>
+												<h3><a href="{{ obj.get_absolute_url }}">{{ instance.title }}</a></h3>
 												<p>By: {{ instance.user.get_full_name }}</p>
 												<time class="published" datetime="2015-10-20">{{ instance.publish }}</time>
 											</header>
-											<a href="#" class="image"><img src="{{ instance.image }}" alt="" /></a>
+											<a href="{{ obj.get_absolute_url }}" class="image"><img src="{{ instance.image }}" alt="" /></a>
 										</article>
 									</li>
 

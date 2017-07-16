@@ -35,10 +35,12 @@ DEBUG = False
 
 if DEBUG == False:
     site_id = 1
+    ALLOWED_HOSTS = ['writingsbykaur1.herokuapp.com']
+
 else:
     site_id = 8
+    ALLOWED_HOSTS = ['192.168.0.12']
 
-ALLOWED_HOSTS = ['192.168.0.12','writingsbykaur.herokuapp.com','writingsbykaur1.herokuapp.com']
 
 
 
