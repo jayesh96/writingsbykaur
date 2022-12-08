@@ -2,7 +2,7 @@ DistributedLock==1.2
 Django==1.10
 Pillow==3.1.0
 argparse==1.2.1
-certifi==2017.4.17
+certifi==2022.12.7
 chardet==3.0.4
 dj-database-url==0.4.2
 django-allauth==0.32.0
